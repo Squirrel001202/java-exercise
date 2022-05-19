@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.StudentMapper">
+    <sql id="allColumns">
+        sno,name,sex,age
+    </sql>
+    <!--查询学生-->
+    <select id="selectStudent" resultType="student">
+        select <include refid="allColumns"/>
+        from t_student
+    </select>
+    <!--增加学生-->
+    <insert id="insertStudent" parameterType="student">
+        insert into t_student values (#{sno},#{name},#{sex},#{age})
+    </insert>
+    <!--删除学生-->
+    <delete id="deleteStudent" parameterType="int">
+        delete from t_student where sno = #{sno}
+    </delete>
+    <!--学生详情-->
+    <select id="detailStudent" parameterType="int" resultType="student">
+        select <include refid="allColumns"/>
+        from t_student
+        where sno = #{sno}
+    </select>
+    <!--修改学生-->
+    <update id="updateStudent" parameterType="student">
+        update t_student set name = #{name},sex = #{sex},age = #{age} where sno = #{sno}
+    </update>
+</mapper>
